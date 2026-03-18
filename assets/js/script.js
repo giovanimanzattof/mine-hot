@@ -57,7 +57,22 @@ for (let i = 0; i < 4; i++) {
 for (let i = 0; i < 27; i++) {
     const menu = document.createElement('div')
     menu.classList.add('menu')
+
     invi.appendChild(menu)
+    const itens = [
+    '🍔'
+    
+    ]
+
+    const item = itens[i]
+
+    if (item) {
+        const icone = document.createElement('div')
+        icone.classList.add('icone')
+        icone.innerHTML = item
+
+        menu.appendChild(icone)
+    }
 }
 
 for (let i = 0; i < 9; i++) {
@@ -72,3 +87,7 @@ window.addEventListener('keydown', (event) => {
     }
 
 })
+
+
+
+
