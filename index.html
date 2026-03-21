@@ -5,44 +5,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/style.css">
-    <title>hotbar</title>
+    <title>Portifolio</title>
 </head>
 
 <body>
-    <div class="hot-bar">
-        <div class="vida">
-            <div class="coracao" id="coracao"></div>
-            <div class="fome" id="fome"></div>
-        </div>
-        <div class="expe" id="experience"></div>
-        <div class="hot" id="hot"></div>
-    </div>
 
-    <div class="inventario" id="inventario">
-        <div class="parte">
-            <div class="armor">
-                <div class="armadur" id="armor"></div>
-                <div class="armor-steve"></div>
-            </div>
-            <div class="craft">
-                <div class="craftt" id="craft"></div>
-                <div class="setaa">
-                    <div class="seta"></div>
+    <header>
+        <div class="titulo">
+            <h2>System interface</h2>
+            <span id="status"></span>
+        </div>
+
+        <nav class="link" id="link">
+            <a href="#">Inicio</a>
+            <a href="#">Sobre</a>
+            <a href="#">Contato</a>
+        </nav>
+
+        <div class="btn">
+            <button id="on-off"></button>
+        </div>
+    </header>
+    <main class="principal">
+        <section class="mine">
+            <div class="hot-bar">
+                <div class="vida">
+                    <div class="coracao" id="coracao"></div>
+                    <div class="fome" id="fome"></div>
                 </div>
-                <div class="res">
-                    <div class="block"></div>
+                <div class="expe" id="experience"></div>
+                <div class="hot" id="hot"></div>
+            </div>
+            <div class="inventario" id="inventario">
+                <div class="parte">
+                    <div class="armor">
+                        <div class="armadur" id="armor"></div>
+                        <div class="armor-steve"></div>
+                    </div>
+                    <div class="craft">
+                        <div class="craftt" id="craft"></div>
+                        <div class="setaa">
+                            <div class="seta"></div>
+                        </div>
+                        <div class="res">
+                            <div class="block"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="parte2">
+                    <div class="ivi" id="hot-inve"></div>
+                </div>
+                <div class="hot-inv">
+                    <div class="bar-hot" id="bar"></div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="parte2">
-            <div class="ivi" id="hot-inve"></div>
-        </div>
+        <section class="terminal-p" id="terminalp">
+            <div class="terminal" id="terminal">
+                <div class="line">
+                    <span class="prompt">user@dev:~$</span>
+                    <input id="input" autofocus />
+                </div>
+            </div>
+        </section>
+        <section class="hero">
+            <h1>Giovani Manzatto Furlan - System</h1>
+            <p>Estou Com objeto de construir sistemas que conectam Software com Hardware, algo que eu posso envolver Web
+                para o fisico.</p>
+            <p>Exemplos:</p>
+            <div class="btn-config">
+                <button>Configuração</button>
+                <button>Telas</button>
+                <button id="btnterminal">Terminal</button>
 
-        <div class="hot-inv">
-            <div class="bar-hot" id="bar"></div>
-        </div>
-    </div>
+            </div>
+        </section>
+
+
+    </main>
+
 
     <script src="assets/js/script.js"></script>
 </body>

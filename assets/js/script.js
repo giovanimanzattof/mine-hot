@@ -24,23 +24,23 @@ for (let i = 0; i < 17; i++) {
 const total = 9
 
 for (let i = 0; i < total; i++) {
-  const bar = document.createElement('div')
-  bar.classList.add('bar')
+    const bar = document.createElement('div')
+    bar.classList.add('bar')
 
-  if (i === total - 1) {
-    const button = document.createElement('button')
-    button.textContent = 'Abrir'
-    button.classList.add("botao")
+    if (i === total - 1) {
+        const button = document.createElement('button')
+        button.textContent = 'Abrir'
+        button.classList.add("botao")
 
-    // ✅ evento funcionando
-    button.addEventListener('click', () => {
-      inventario.classList.toggle('hidden')
-    })
+        // ✅ evento funcionando
+        button.addEventListener('click', () => {
+            inventario.classList.toggle('hidden')
+        })
 
-    bar.appendChild(button)
-  }
+        bar.appendChild(button)
+    }
 
-  hot.appendChild(bar)
+    hot.appendChild(bar)
 }
 
 
@@ -60,8 +60,8 @@ for (let i = 0; i < 27; i++) {
 
     invi.appendChild(menu)
     const itens = [
-    '🍔'
-    
+        '🍔'
+
     ]
 
     const item = itens[i]
@@ -82,12 +82,71 @@ for (let i = 0; i < 9; i++) {
 }
 
 window.addEventListener('keydown', (event) => {
-    if (event.key === 'e') {
+    if (event.key === 'E') {
         inventario.classList.toggle('hidden')
     }
 
 })
+const input = document.getElementById("input");
+const terminal = document.getElementById("terminal");
 
+input.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+        const value = input.value;
 
+        // cria nova linha com comando digitado
+        const line = document.createElement("div");
+        line.classList.add("line");
+        line.innerHTML = `
+          <span class="prompt">user@dev:~$</span>
+          <span>${value}</span>
+        `;
 
+        terminal.insertBefore(line, input.parentElement);
+
+        // resposta fake
+        const output = document.createElement("div");
+        output.innerHTML = getCommand(value);
+        terminal.insertBefore(output, input.parentElement);
+
+        input.value = "";
+        terminal.scrollTop = terminal.scrollHeight;
+    }
+});
+
+function getCommand(cmd) {
+    if (cmd === "help") {
+        return "Comandos:<br>help<br>clear<br>iniciar";
+    } else if (cmd === "clear") {
+        terminal.innerHTML = `
+          <div class="line">
+            <span class="prompt">user@dev:~$</span>
+            <input id="input" autofocus />
+          </div>
+        `;
+        location.reload();
+    }else if (cmd === "iniciar") {
+        const relad = document.createElement("div")
+        relad.classList.add("reload")
+        terminal.appendChild(relad)
+        setTimeout(() => {
+            terminalp.style.display = "none"
+            location.reload();
+        }, 2000);
+        
+        return ""
+    }
+
+    return `Comando nao encontrado`
+}
+const btnterminal = document.getElementById("btnterminal")
+const terminalp = document.getElementById("terminalp")
+
+btnterminal.addEventListener('click', () => {
+    if(terminalp.style.display === 'none'){
+        terminalp.style.display = 'block'
+    } else {
+        terminalp.style.display = 'none'
+    }
+})
 
