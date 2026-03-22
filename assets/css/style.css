@@ -240,6 +240,9 @@ input::placeholder {
 .statuss{
     color: green;
 }
+.page{
+    opacity: 0;
+}
 
 
 

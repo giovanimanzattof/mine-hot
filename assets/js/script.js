@@ -106,16 +106,34 @@ function getCommand(cmd) {
             return "";
         },
         iniciar: () => {
-            terminal.innerHTML += `<p>${sistema()}`
+            // Adiciona texto no terminal
+            terminal.innerHTML += `<p>${sistema()}</p>`;
+
+            // Aguarda 4s antes de continuar
             setTimeout(() => {
-                terminalp.classList.toggle('terminalh')
-                const site = document.getElementById('site')
-                site.style.display = 'block'
-                const mine = document.getElementById('mine')
-                mine.style.opacity = '1'
-                iniciarSistema()
-            }, 4000);
-            
+                // Alterna classe
+                terminalp.classList.toggle('terminalh');
+
+                // Exibe elementos
+                const site = document.getElementById('site');
+                site.style.display = 'block';
+
+                const mine = document.getElementById('mine');
+                mine.style.opacity = '1';
+
+                // Animação com GSAP
+                const pages = document.querySelectorAll('.page');
+                gsap.to(pages, {
+                    opacity: 1,
+                    delay: 1,
+                    duration: 2,
+                    stagger: 0.5 // animação sequencial mais suave
+                });
+
+                // Toca áudio com tratamento de erros
+
+
+            }, 3000);
             return ""
         },
         status: () => {
