@@ -1,8 +1,4 @@
-const hot = document.getElementById("hot")
-const armor = document.getElementById("armor")
-const invi = document.getElementById('hot-inve')
 const bar = document.getElementById('bar')
-const inventario = document.getElementById('inventario')
 const botao = document.getElementById('botao')
 
 const total = 9
@@ -29,47 +25,10 @@ for (let i = 0; i < total; i++) {
 
 
 
-
-for (let i = 0; i < 27; i++) {
-    const menu = document.createElement('div')
-    menu.classList.add('menu')
-
-    invi.appendChild(menu)
-    const itens = [
-        '🍔'
-
-    ]
-
-    const item = itens[i]
-
-    if (item) {
-        const icone = document.createElement('div')
-        icone.classList.add('icone')
-        icone.innerHTML = item
-
-        menu.appendChild(icone)
-    }
-}
-
-for (let i = 0; i < 9; i++) {
-    const hotbar = document.createElement('div')
-    hotbar.classList.add('hotbar')
-    bar.appendChild(hotbar)
-}
-
-window.addEventListener('keydown', (event) => {
-    if (event.key === 'E') {
-        inventario.classList.toggle('hidden')
-    }
-
-})
-
-
-const inputs = document.querySelectorAll(".terminal-input");
+const input = document.querySelector(".terminal-input");
 const terminal = document.getElementById("terminal");
-const armorsteve = document.getElementById("armorsteve");
 
-inputs.forEach((input) => {
+
     input.addEventListener("keydown", function (e) {
         if (e.key === "Enter") {
             const value = input.value;
@@ -102,7 +61,7 @@ inputs.forEach((input) => {
             parentContainer.scrollTop = parentContainer.scrollHeight;
         }
     });
-});
+
 
 function getCommand(cmd) {
     cmd = cmd.toLowerCase();
@@ -121,7 +80,6 @@ function getCommand(cmd) {
         },
         clear: () => {
             terminal.innerHTML = createInputLine();
-            armorsteve.innerHTML = createInputLine();
             attachInputEvents();
             return "";
         },
@@ -130,7 +88,9 @@ function getCommand(cmd) {
                 terminal.innerHTML += `<p>${sistema()}`
             }, 2000);
             setTimeout(() => {
-                terminalp.style.display = "none";
+                terminalp.classList.toggle('terminalh')
+                const site = document.getElementById('site')
+                site.style.display = 'block'
             }, 5000);
             return ""
         },
@@ -208,12 +168,28 @@ index.html
         },
         exit: () => {
             setTimeout(() => {
-                terminalp.style.display = 'none'
-                inventario.style.display = 'none'
+                terminalp.classList.remove('terminalh')
             }, 3000);
             return "Saindo.."
         },
-        
+        poweroff: () => {
+            setTimeout(() => {
+            const site = document.getElementById('site')
+            site.style.display = 'none'
+            terminalp.classList.remove('terminalh')
+            const off = document.getElementById('off')
+            const on = document.getElementById('on')
+            on.style.display = 'block'
+            off.style.display = 'none'
+            }, 2000);
+            
+            return "Sistema Desligando..."
+        },
+        desligar: () => {
+            window.location.href='https://google.com'
+            return "Finalizando Sistema"
+        }
+
 
     };
     return comandos[cmd]
@@ -224,13 +200,12 @@ const btnterminal = document.getElementById("btnterminal")
 const terminalp = document.getElementById("terminalp")
 
 btnterminal.addEventListener('click', () => {
-    if (terminalp.style.display === 'none') {
-        terminalp.style.display = 'block'
+    terminalp.classList.toggle("terminalh")
+    terminal.innerHTML = createInputLine();
+    attachInputEvents();
+});
 
-    } else {
-        terminalp.style.display = 'none'
-    }
-})
+
 
 function dia() {
     const agora = new Date();
@@ -243,15 +218,19 @@ let off = document.getElementById("off")
 let on = document.getElementById("on")
 
 on.addEventListener('click', () => {
-    terminalp.style.opacity = '1'
+    terminalp.classList.toggle('terminalh')
     on.style.display = 'none'
     off.style.display = 'block'
+    terminal.innerHTML = createInputLine();
+    attachInputEvents();
 })
 
 off.addEventListener("click", () => {
-    terminalp.style.display = 'none'
+    terminalp.classList.remove('terminalh')
     on.style.display = 'block'
     off.style.display = 'none'
+    const site = document.getElementById('site')
+    site.style.display = 'none'
 })
 function createInputLine() {
     return `
@@ -262,11 +241,11 @@ function createInputLine() {
     `;
 }
 function attachInputEvents() {
-    const inputs = document.querySelectorAll(".terminal-input");
+    const input = document.querySelector(".terminal-input");
 
-    inputs.forEach((input) => {
+
         input.addEventListener("keydown", handleInput);
-    });
+  
 }
 function handleInput(e) {
     if (e.key !== "Enter") return;
@@ -309,4 +288,6 @@ function sistema() {
 
     return 'Inicializando...'
 }
+
+
 
