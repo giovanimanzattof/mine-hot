@@ -127,8 +127,7 @@ function getCommand(cmd) {
             version -> Vesão do sistema<br>
             about -> Abre o perfil(sobre)<br>
             projetos -> Lista de projetos<br>
-            contato -> Mostra contato<br> 
-            open door -> Mostra sistema de abrir porta `;
+            contato -> Mostra contato`;
         },
 
         clear: () => {
