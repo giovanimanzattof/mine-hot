@@ -10,7 +10,7 @@
 
 <body>
 
-    <header>
+    <header class="cabecalho">
         <div class="titulo">
             <h2>System interface</h2>
             <span id="status"></span>
@@ -25,26 +25,16 @@
     <main class="principal">
         <section class="mine">
             <div class="hot-bar">
-                <div class="vida">
-                    <div class="coracao" id="coracao"></div>
-                    <div class="fome" id="fome"></div>
-                </div>
-                <div class="expe" id="experience"></div>
                 <div class="hot" id="hot"></div>
             </div>
             <div class="inventario" id="inventario">
                 <div class="parte">
                     <div class="armor">
-                        <div class="armadur" id="armor"></div>
-                        <div class="armor-steve"></div>
-                    </div>
-                    <div class="craft">
-                        <div class="craftt" id="craft"></div>
-                        <div class="setaa">
-                            <div class="seta"></div>
-                        </div>
-                        <div class="res">
-                            <div class="block"></div>
+                        <div class="armor-steve" id="armorsteve">
+                            <div class="line" id="armorline">
+                                <span class="prompt">user@dev:~$</span>
+                                <input class="terminal-input" autofocus />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -61,20 +51,25 @@
             <div class="terminal" id="terminal">
                 <div class="line">
                     <span class="prompt">user@dev:~$</span>
-                    <input id="input" autofocus />
+                    <input class="terminal-input" autofocus />
                 </div>
             </div>
         </section>
         <div class="site">
             <section class="hero">
-                <h1>Giovani Manzatto Furlan - System</h1>
-                <p>Estou Com objeto de construir sistemas que conectam Software com Hardware, algo que eu posso envolver Web
-                    para o fisico.</p>
-                <p>Exemplos:</p>
-                <div class="btn-config">
-                    <button>Configuração</button>
-                    <button>Telas</button>
-                    <button id="btnterminal">Terminal</button>
+                <div class="hero-info">
+                    <h1>Giovani Manzatto Furlan - System</h1>
+                    <p>Estou Com objeto de construir sistemas que conectam Software com Hardware, algo que eu posso envolver Web
+                        para o fisico.</p>
+                    <div class="btn-config">
+                        <button>Configuração</button>
+                        <button>Telas</button>
+                        <button id="btnterminal">Terminal</button>
+                    </div>
+                    
+                </div>
+                <div class="image">
+                        
                 </div>
             </section>
         </div>
@@ -83,7 +78,7 @@
     </main>
 
 
-    <script src="assets/js/script.js"></script>
+    <script src="assets/js/script.js" defer></script>
 </body>
 
 </html>

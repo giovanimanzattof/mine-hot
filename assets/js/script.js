@@ -1,25 +1,9 @@
-const coracao = document.getElementById('coracao')
-const fome = document.getElementById("fome")
-const expe = document.getElementById("experience")
 const hot = document.getElementById("hot")
 const armor = document.getElementById("armor")
-const craft = document.getElementById("craft")
 const invi = document.getElementById('hot-inve')
 const bar = document.getElementById('bar')
 const inventario = document.getElementById('inventario')
 const botao = document.getElementById('botao')
-
-
-for (let i = 0; i < 10; i++) {
-    coracao.innerHTML += '❤️'
-    fome.innerHTML += "🍖"
-}
-
-for (let i = 0; i < 17; i++) {
-    const div = document.createElement('div')
-    div.classList.add('experi')
-    expe.appendChild(div)
-}
 
 const total = 9
 
@@ -44,16 +28,8 @@ for (let i = 0; i < total; i++) {
 }
 
 
-for (let i = 0; i < 4; i++) {
-    const armadura = document.createElement("div")
-    armadura.classList.add('armadura')
-    armor.appendChild(armadura)
-}
-for (let i = 0; i < 4; i++) {
-    const bancada = document.createElement('div')
-    bancada.classList.add('bancada')
-    craft.appendChild(bancada)
-}
+
+
 for (let i = 0; i < 27; i++) {
     const menu = document.createElement('div')
     menu.classList.add('menu')
@@ -89,31 +65,43 @@ window.addEventListener('keydown', (event) => {
 })
 
 
-const input = document.getElementById("input");
+const inputs = document.querySelectorAll(".terminal-input");
 const terminal = document.getElementById("terminal");
+const armorsteve = document.getElementById("armorsteve");
 
-input.addEventListener("keydown", function (e) {
-    if (e.key === "Enter") {
-        const value = input.value;
+inputs.forEach((input) => {
+    input.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+            const value = input.value;
 
-        // cria nova linha com comando digitado
-        const line = document.createElement("div");
-        line.classList.add("line");
-        line.innerHTML = `
-          <span class="prompt">user@dev:~$</span>
-          <span>${value}</span>
-        `;
+            const parentContainer = input.closest(".terminal, .armor-steve");
 
-        terminal.insertBefore(line, input.parentElement);
+            // cria linha digitada
+            const line = document.createElement("div");
+            line.classList.add("line");
 
-        // resposta fake
-        const output = document.createElement("div");
-        output.innerHTML = getCommand(value);
-        terminal.insertBefore(output, input.parentElement);
+            const prompt = document.createElement("span");
+            prompt.classList.add("prompt");
+            prompt.textContent = "user@dev:~$";
 
-        input.value = "";
-        terminal.scrollTop = terminal.scrollHeight;
-    }
+            const text = document.createElement("span");
+            text.textContent = value;
+
+            line.appendChild(prompt);
+            line.appendChild(text);
+
+            parentContainer.insertBefore(line, input.parentElement);
+
+            // resposta fake
+            const output = document.createElement("div");
+            output.innerHTML = getCommand(value);
+
+            parentContainer.insertBefore(output, input.parentElement);
+
+            input.value = "";
+            parentContainer.scrollTop = parentContainer.scrollHeight;
+        }
+    });
 });
 
 function getCommand(cmd) {
@@ -131,34 +119,26 @@ function getCommand(cmd) {
             projetos -> Lista de projetos<br>
             contato -> Mostra contato`;
         },
-
         clear: () => {
-            terminal.innerHTML = `
-                <div class="line">
-                    <span class="prompt">user@dev:~$</span>
-                    <input id="input" autofocus />
-                </div>
-            `;
-            location.reload();
+            terminal.innerHTML = createInputLine();
+            armorsteve.innerHTML = createInputLine();
+            attachInputEvents();
+            return "";
         },
-
         iniciar: () => {
-            const relad = document.createElement("div");
-            relad.classList.add("reload");
-            terminal.appendChild(relad);
+            setTimeout(() => {
+                terminal.innerHTML += `<p>${sistema()}`
+            }, 2000);
             setTimeout(() => {
                 terminalp.style.display = "none";
-                location.reload();
             }, 5000);
             return ""
         },
-
         status: () => {
             return `ESP32: Offline<br>
                     MQTT: Offline<br>
                     Sistema: Online<br>
                     Ultima atualização: ${dia()}`
-
         },
         version: () => {
             return `KOMBI SMART SYSTEM<br>
@@ -211,11 +191,31 @@ function getCommand(cmd) {
             return `Email: giovanisistemaembarcado@gmail.com <br>
                     GitHub: https://github.com/giovanimanzattof<br>
                     LinkedIn: linkedin.com/in/seuuser<br>`
-        }
-
+        },
+        dir: () => {
+            return `
+<pre>
+Assets
+  CSS
+    Style.css
+  Image
+    logo.jpg
+  js
+    script.js
+index.html
+</pre>
+`;
+        },
+        exit: () => {
+            setTimeout(() => {
+                terminalp.style.display = 'none'
+                inventario.style.display = 'none'
+            }, 3000);
+            return "Saindo.."
+        },
+        
 
     };
-
     return comandos[cmd]
         ? comandos[cmd]()
         : "Comando nao encontrado";
@@ -239,18 +239,74 @@ function dia() {
 
 }
 
-const off = document.getElementById("off")
-const on = document.getElementById("on")
+let off = document.getElementById("off")
+let on = document.getElementById("on")
 
 on.addEventListener('click', () => {
-    if (terminalp.style.display === 'none') {
-        terminalp.style.display = 'block'
-        on.disabled = true
-    } else {
-        terminalp.style.display = 'none'
-    }
-
+    terminalp.style.opacity = '1'
+    on.style.display = 'none'
+    off.style.display = 'block'
 })
 
+off.addEventListener("click", () => {
+    terminalp.style.display = 'none'
+    on.style.display = 'block'
+    off.style.display = 'none'
+})
+function createInputLine() {
+    return `
+        <div class="line">
+            <span class="prompt">user@dev:~$</span>
+            <input class="terminal-input" autofocus />
+        </div>
+    `;
+}
+function attachInputEvents() {
+    const inputs = document.querySelectorAll(".terminal-input");
 
+    inputs.forEach((input) => {
+        input.addEventListener("keydown", handleInput);
+    });
+}
+function handleInput(e) {
+    if (e.key !== "Enter") return;
+
+    const input = e.target;
+    const value = input.value;
+
+    const parentContainer = input.closest(".terminal, .armor-steve");
+
+    // cria linha digitada
+    const line = document.createElement("div");
+    line.classList.add("line");
+
+    const prompt = document.createElement("span");
+    prompt.classList.add("prompt");
+    prompt.textContent = "user@dev:~$";
+
+    const text = document.createElement("span");
+    text.textContent = value;
+
+    line.appendChild(prompt);
+    line.appendChild(text);
+
+    parentContainer.insertBefore(line, input.parentElement);
+
+    // resposta
+    const output = document.createElement("div");
+    output.innerHTML = getCommand(value);
+
+    parentContainer.insertBefore(output, input.parentElement);
+
+    input.value = "";
+    parentContainer.scrollTop = parentContainer.scrollHeight;
+}
+
+function sistema() {
+    setTimeout(() => {
+        terminal.innerHTML += '<p>✔️ Sistema pronto</p>'
+    }, 1000)
+
+    return 'Inicializando...'
+}
 
