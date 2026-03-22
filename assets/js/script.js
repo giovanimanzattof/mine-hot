@@ -115,38 +115,141 @@ input.addEventListener("keydown", function (e) {
 });
 
 function getCommand(cmd) {
-    if (cmd === "help") {
-        return "Comandos:<br>help<br>clear<br>iniciar";
-    } else if (cmd === "clear") {
-        terminal.innerHTML = `
-          <div class="line">
-            <span class="prompt">user@dev:~$</span>
-            <input id="input" autofocus />
-          </div>
-        `;
-        location.reload();
-    }else if (cmd === "iniciar") {
-        const relad = document.createElement("div")
-        relad.classList.add("reload")
-        terminal.appendChild(relad)
-        setTimeout(() => {
-            terminalp.style.display = "none"
-            location.reload();
-        }, 2000);
-        
-        return ""
-    }
+    cmd = cmd.toLowerCase();
 
-    return `Comando nao encontrado`
+    const comandos = {
+        help: () => {
+            return `Comandos:<br>
+            help -> Lista de Comandos<br>
+            clear -> Limpa tela<br>
+            iniciar -> Inicia o site<br>
+            status -> Mostra status do sistema<br>
+            version -> Vesão do sistema<br>
+            about -> Abre o perfil(sobre)<br>
+            projetos -> Lista de projetos<br>
+            contato -> Mostra contato<br> 
+            open door -> Mostra sistema de abrir porta `;
+        },
+
+        clear: () => {
+            terminal.innerHTML = `
+                <div class="line">
+                    <span class="prompt">user@dev:~$</span>
+                    <input id="input" autofocus />
+                </div>
+            `;
+            location.reload();
+        },
+
+        iniciar: () => {
+            const relad = document.createElement("div");
+            relad.classList.add("reload");
+            terminal.appendChild(relad);
+            setTimeout(() => {
+                terminalp.style.display = "none";
+                location.reload();
+            }, 5000);
+            return ""
+        },
+
+        status: () => {
+            return `ESP32: Offline<br>
+                    MQTT: Offline<br>
+                    Sistema: Online<br>
+                    Ultima atualização: ${dia()}`
+
+        },
+        version: () => {
+            return `KOMBI SMART SYSTEM<br>
+                    Versão: v1.0.0<br>
+                    Build: 2026.03<br>
+                    Modo: Desenvolvimento`
+        },
+        about: () => {
+            return `Desenvolvido por: <br>
+                    <br>
+                    Giovani Manzatto Furlan <br>
+                    Em desenvolvimento de Sistemas Embarcados <br>
+                    Tenho a Base do FrontEnd <br>
+                    <br>
+                    Stack: <br>
+                    - ESP32 (C++)<br>
+                    - MQTT<br>
+                    - Android (Kotlin) <br>
+                    - Raspberry Pi<br>
+                    - HTML <br>
+                    - CSS <br>
+                    - JavaScript <br>
+                    - Git e GitHub`
+        },
+        projetos: () => {
+            return `Projetos Disponiveis: <br>
+                    <br>
+                    [1] Hamburgueria <br>
+                    Projeto: <a href="https://giovanimanzattof.github.io/portifolio-giovani-2.0/" target="_blank" rel="noopener noreferrer"style="text-decoration: none; color: #00ff00;">Clique aqui</a> <br>
+                    <br>
+                    [2] Pizzaria <br>
+                    Projeto: <a href="https://giovanimanzattof.github.io/pizzaria/" target="_blank" rel="noopener noreferrer"style="text-decoration: none; color: #00ff00;">Clique aqui</a><br>
+                    <br>
+                    [3] Cafeteria <br>
+                    Projeto: <a href="https://giovanimanzattof.github.io/cafeteria/" target="_blank" rel="noopener noreferrer"style="text-decoration: none; color: #00ff00;">Clique aqui</a><br>
+                    <br>
+                    [4] Carros <br>
+                    Projeto: <a href="https://giovanimanzattof.github.io/carros/" target="_blank" rel="noopener noreferrer"style="text-decoration: none; color: #00ff00;">Clique aqui</a><br>
+                    <br>
+                    [5] Cordel <br>
+                    Projeto: <a href="https://giovanimanzattof.github.io/projeto-cordel/" target="_blank" rel="noopener noreferrer"style="text-decoration: none; color: #00ff00;">Clique aqui</a><br>
+                    <br>
+                    [6] Minecraft <br>
+                    Projeto: <a href="https://giovanimanzattof.github.io/minecraft/" target="_blank" rel="noopener noreferrer"style="text-decoration: none; color: #00ff00;">Clique aqui</a><br>
+                    <br>
+                    [7] Barbearia <br>
+                    Projeto: <a href="https://giovanimanzattof.github.io/barbearia-projeto/" target="_blank" rel="noopener noreferrer"style="text-decoration: none; color: #00ff00;">Clique aqui</a>`
+        },
+        contato: () => {
+            return `Email: giovanisistemaembarcado@gmail.com <br>
+                    GitHub: https://github.com/giovanimanzattof<br>
+                    LinkedIn: linkedin.com/in/seuuser<br>`
+        }
+
+
+    };
+
+    return comandos[cmd]
+        ? comandos[cmd]()
+        : "Comando nao encontrado";
 }
 const btnterminal = document.getElementById("btnterminal")
 const terminalp = document.getElementById("terminalp")
 
 btnterminal.addEventListener('click', () => {
-    if(terminalp.style.display === 'none'){
+    if (terminalp.style.display === 'none') {
         terminalp.style.display = 'block'
+        
     } else {
         terminalp.style.display = 'none'
     }
 })
+
+function dia() {
+    const agora = new Date();
+
+    return agora.toLocaleString();
+
+}
+
+const off = document.getElementById("off")
+const on = document.getElementById("on")
+
+on.addEventListener('click', () => {
+    if (terminalp.style.display === 'none') {
+        terminalp.style.display = 'block'
+        on.disabled = true
+    } else {
+        terminalp.style.display = 'none'
+    }
+
+})
+
+
 
