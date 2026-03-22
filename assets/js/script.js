@@ -1,26 +1,49 @@
+
 const bar = document.getElementById('bar')
 const botao = document.getElementById('botao')
 
 const total = 9
 
+const modulos = [
+    { icon: "🚗", nome: "Kombi Smart" },
+    { icon: "📡", nome: "MQTT" },
+    { icon: "🔌", nome: "ESP32" },
+    { icon: "🧠", nome: "Sobre" },
+    { icon: "📊", nome: "Logs" },
+    { icon: "⚙️", nome: "Sistema" },
+    { icon: "📞", nome: "Contato" },
+    { icon: "📁", nome: "Projetos" }
+];
+
 for (let i = 0; i < total; i++) {
-    const bar = document.createElement('div')
-    bar.classList.add('bar')
+    const bar = document.createElement('div');
+    bar.classList.add('bar');
 
-    if (i === total - 1) {
-        const button = document.createElement('button')
-        button.textContent = 'Abrir'
-        button.classList.add("botao")
+    // 🔹 adiciona ícone se existir
+    if (modulos[i]) {
+        const item = document.createElement('span');
+        item.classList.add("icone");
+        item.textContent = modulos[i].icon;
+        item.title = modulos[i].nome;
 
-        // ✅ evento funcionando
-        button.addEventListener('click', () => {
-            inventario.classList.toggle('hidden')
-        })
 
-        bar.appendChild(button)
+        bar.appendChild(item);
     }
 
-    hot.appendChild(bar)
+    // 🔹 último slot com botão
+    if (i === total - 1) {
+        const button = document.createElement('button');
+        button.textContent = 'Abrir';
+        button.classList.add("botao");
+
+        button.addEventListener('click', () => {
+            inventario.classList.toggle('hidden');
+        });
+
+        bar.appendChild(button);
+    }
+
+    hot.appendChild(bar);
 }
 
 
@@ -29,39 +52,38 @@ const input = document.querySelector(".terminal-input");
 const terminal = document.getElementById("terminal");
 
 
-    input.addEventListener("keydown", function (e) {
-        if (e.key === "Enter") {
-            const value = input.value;
+input.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+        const value = input.value;
 
-            const parentContainer = input.closest(".terminal, .armor-steve");
+        const parentContainer = input.closest(".terminal, .armor-steve");
 
-            // cria linha digitada
-            const line = document.createElement("div");
-            line.classList.add("line");
+        // cria linha digitada
+        const line = document.createElement("div");
+        line.classList.add("line");
 
-            const prompt = document.createElement("span");
-            prompt.classList.add("prompt");
-            prompt.textContent = "user@dev:~$";
+        const prompt = document.createElement("span");
+        prompt.classList.add("prompt");
+        prompt.textContent = "user@dev:~$";
 
-            const text = document.createElement("span");
-            text.textContent = value;
+        const text = document.createElement("span");
+        text.textContent = value;
 
-            line.appendChild(prompt);
-            line.appendChild(text);
+        line.appendChild(prompt);
+        line.appendChild(text);
 
-            parentContainer.insertBefore(line, input.parentElement);
+        parentContainer.insertBefore(line, input.parentElement);
 
-            // resposta fake
-            const output = document.createElement("div");
-            output.innerHTML = getCommand(value);
+        // resposta fake
+        const output = document.createElement("div");
+        output.innerHTML = getCommand(value);
 
-            parentContainer.insertBefore(output, input.parentElement);
+        parentContainer.insertBefore(output, input.parentElement);
 
-            input.value = "";
-            parentContainer.scrollTop = parentContainer.scrollHeight;
-        }
-    });
-
+        input.value = "";
+        parentContainer.scrollTop = parentContainer.scrollHeight;
+    }
+});
 
 function getCommand(cmd) {
     cmd = cmd.toLowerCase();
@@ -84,13 +106,13 @@ function getCommand(cmd) {
             return "";
         },
         iniciar: () => {
-            setTimeout(() => {
-                terminal.innerHTML += `<p>${sistema()}`
-            }, 2000);
+            terminal.innerHTML += `<p>${sistema()}`
             setTimeout(() => {
                 terminalp.classList.toggle('terminalh')
                 const site = document.getElementById('site')
                 site.style.display = 'block'
+                const mine = document.getElementById('mine')
+                mine.style.opacity = '1'
             }, 5000);
             return ""
         },
@@ -174,21 +196,24 @@ index.html
         },
         poweroff: () => {
             setTimeout(() => {
-            const site = document.getElementById('site')
-            site.style.display = 'none'
-            terminalp.classList.remove('terminalh')
-            const off = document.getElementById('off')
-            const on = document.getElementById('on')
-            on.style.display = 'block'
-            off.style.display = 'none'
+                const site = document.getElementById('site')
+                site.style.display = 'none'
+                terminalp.classList.remove('terminalh')
+                const off = document.getElementById('off')
+                const on = document.getElementById('on')
+                on.style.display = 'block'
+                off.style.display = 'none'
+                const mine = document.getElementById('mine')
+                mine.style.opacity = '0'
             }, 2000);
-            
+
             return "Sistema Desligando..."
         },
         desligar: () => {
-            window.location.href='https://google.com'
+            window.location.href = 'https://google.com'
             return "Finalizando Sistema"
-        }
+        },
+
 
 
     };
@@ -231,6 +256,8 @@ off.addEventListener("click", () => {
     off.style.display = 'none'
     const site = document.getElementById('site')
     site.style.display = 'none'
+    const mine = document.getElementById('mine')
+    mine.style.opacity = '0'
 })
 function createInputLine() {
     return `
@@ -244,8 +271,8 @@ function attachInputEvents() {
     const input = document.querySelector(".terminal-input");
 
 
-        input.addEventListener("keydown", handleInput);
-  
+    input.addEventListener("keydown", handleInput);
+
 }
 function handleInput(e) {
     if (e.key !== "Enter") return;
@@ -284,10 +311,11 @@ function handleInput(e) {
 function sistema() {
     setTimeout(() => {
         terminal.innerHTML += '<p>✔️ Sistema pronto</p>'
-    }, 1000)
+    }, 2000)
 
     return 'Inicializando...'
 }
+
 
 
 
