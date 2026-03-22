@@ -87,6 +87,8 @@ window.addEventListener('keydown', (event) => {
     }
 
 })
+
+
 const input = document.getElementById("input");
 const terminal = document.getElementById("terminal");
 
@@ -224,7 +226,7 @@ const terminalp = document.getElementById("terminalp")
 btnterminal.addEventListener('click', () => {
     if (terminalp.style.display === 'none') {
         terminalp.style.display = 'block'
-        
+
     } else {
         terminalp.style.display = 'none'
     }
