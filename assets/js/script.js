@@ -113,7 +113,9 @@ function getCommand(cmd) {
                 site.style.display = 'block'
                 const mine = document.getElementById('mine')
                 mine.style.opacity = '1'
-            }, 5000);
+                iniciarSistema()
+            }, 4000);
+            
             return ""
         },
         status: () => {
@@ -177,14 +179,15 @@ function getCommand(cmd) {
         dir: () => {
             return `
 <pre>
-Assets
-  CSS
-    Style.css
-  Image
-    logo.jpg
-  js
-    script.js
-index.html
+Portifolio
+├── Assets
+│   ├── CSS
+│   │   └── Style.css
+│   ├── Image
+│   │   └── logo.jpg
+│   └── js
+│       └── script.js
+└── index.html
 </pre>
 `;
         },
@@ -316,6 +319,15 @@ function sistema() {
     return 'Inicializando...'
 }
 
+function obterStatus() {
+    const site = document.getElementById('site')
+    return site.style.display === 'block' ? 'ON' : 'OFF'
+}
+const statuss = document.getElementById("status")
+const statusdiv = document.createElement('div')
 
-
-
+statusdiv.classList.add('statusdiv')
+statuss.appendChild(statusdiv)
+setInterval(() => {
+    statusdiv.innerHTML = `Status: <span class="statuss">${obterStatus()}</span>`
+}, 200)

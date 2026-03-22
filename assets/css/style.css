@@ -229,19 +229,19 @@ input::placeholder {
     aspect-ratio: 16;
     height: 400px;
     border: 3px solid rebeccapurple;
-    border-bottom: 3px solid rgba(255, 255, 255, 0.151);
-    border-right: 3px solid rgba(255, 255, 255, 0.151);
-    border-left: 3px solid rgba(255, 255, 255, 0.151);
-    animation: girar 1s linear infinite;
     width: 400px;
     border-radius: 50%;
+    position: relative;
 }
 
-@keyframes girar {
-    100%{
-        transform: rotate(360deg);
-    }
+.statusdiv{
+    color: #2e3cff;
 }
+.statuss{
+    color: green;
+}
+
+
 
 
 
@@ -274,70 +274,11 @@ input::placeholder {
         width: 300px;
     }
 
-    .vida {
-        gap: 30px;
-        justify-content: space-between;
-    }
-
-    .coracao,
-    .fome {
-        font-size: 9px;
-    }
 
     .bar {
         height: 30px;
         width: 50px;
     }
-
-    .experi {
-        height: 6px;
-    }
-
-    .inventario {
-        width: 300px;
-        padding: 5px;
-    }
-
-    .parte {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .armor {
-        justify-content: center;
-    }
-
-    .armor-steve {
-        width: 290px;
-    }
-
-    .craftt {
-        grid-template-columns: repeat(2, 40px);
-    }
-
-    .ivi {
-        grid-template-columns: repeat(9, 30px);
-        justify-content: center;
-    }
-
-    .armadura,
-    .bancada,
-    .block,
-    .menu,
-    .hotbar {
-        width: 30px;
-        height: 30px;
-    }
-
-    .bar-hot {
-        justify-content: center;
-    }
-
-    .seta {
-        display: none;
-    }
-
     .botao {
         display: block;
         height: 30px;
@@ -347,23 +288,41 @@ input::placeholder {
         box-shadow: inset 2px 2px 0px rgb(66, 65, 65), inset -2px -2px 0px rgb(190, 190, 190), inset 0px 0px 10px rgba(0, 0, 0, 0.767);
         border: 2px solid gray;
     }
-
-    .hotbar {
-        width: 100%;
-    }
-
     .terminal {
         width: 300px;
     }
     .hero{
         width: 100%;
+        padding: 30px;
     }
+    .hero-info{
+        width: 100%;
+        text-align: center;
+    }
+    .hero-info h1{
+        font-size: 34px;
+    }
+    .hero-info p{
+        font-size: 12px;
+        width: 100%;
+    }
+    .btn-config{
+        gap: 20px;
+    }
+    .btn-config button{
+        padding: 7px 15px;
+    }
+    
     .image{
         width: 200px;
         height: 200px;
+        animation: none;
+        border: 3px solid rebeccapurple;
+        border-radius: 20%;
     }
     .icone{
         font-size: 14px;
     }
+    
 
 }
