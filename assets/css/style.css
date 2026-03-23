@@ -282,15 +282,6 @@ input::placeholder {
         height: 30px;
         width: 50px;
     }
-    .botao {
-        display: block;
-        height: 30px;
-        width: 30px;
-        font-size: 7px;
-        background-color: rgba(102, 102, 102, 0.452);
-        box-shadow: inset 2px 2px 0px rgb(66, 65, 65), inset -2px -2px 0px rgb(190, 190, 190), inset 0px 0px 10px rgba(0, 0, 0, 0.767);
-        border: 2px solid gray;
-    }
     .terminal {
         width: 300px;
     }
