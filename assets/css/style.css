@@ -224,14 +224,17 @@ input::placeholder {
     background-color: #dadada;
     color: black;
 }
-.image{
+
+
+.image img{
     background-color: transparent;
     aspect-ratio: 16;
     height: 400px;
     border: 3px solid rebeccapurple;
     width: 400px;
     border-radius: 50%;
-    position: relative;
+    object-fit: cover;
+    
 }
 
 .statusdiv{
@@ -315,8 +318,8 @@ input::placeholder {
     .btn-config button{
         padding: 7px 15px;
     }
-    
-    .image{
+
+    .image img{
         width: 200px;
         height: 200px;
         animation: none;

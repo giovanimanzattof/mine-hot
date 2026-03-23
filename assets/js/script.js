@@ -1,53 +1,4 @@
 
-const bar = document.getElementById('bar')
-const botao = document.getElementById('botao')
-
-const total = 9
-
-const modulos = [
-    { icon: "🚗", nome: "Kombi Smart" },
-    { icon: "📡", nome: "MQTT" },
-    { icon: "🔌", nome: "ESP32" },
-    { icon: "🧠", nome: "Sobre" },
-    { icon: "📊", nome: "Logs" },
-    { icon: "⚙️", nome: "Sistema" },
-    { icon: "📞", nome: "Contato" },
-    { icon: "📁", nome: "Projetos" }
-];
-
-for (let i = 0; i < total; i++) {
-    const bar = document.createElement('div');
-    bar.classList.add('bar');
-
-    // 🔹 adiciona ícone se existir
-    if (modulos[i]) {
-        const item = document.createElement('span');
-        item.classList.add("icone");
-        item.textContent = modulos[i].icon;
-        item.title = modulos[i].nome;
-
-
-        bar.appendChild(item);
-    }
-
-    // 🔹 último slot com botão
-    if (i === total - 1) {
-        const button = document.createElement('button');
-        button.textContent = 'Abrir';
-        button.classList.add("botao");
-
-        button.addEventListener('click', () => {
-            inventario.classList.toggle('hidden');
-        });
-
-        bar.appendChild(button);
-    }
-
-    hot.appendChild(bar);
-}
-
-
-
 const input = document.querySelector(".terminal-input");
 const terminal = document.getElementById("terminal");
 
@@ -90,15 +41,41 @@ function getCommand(cmd) {
 
     const comandos = {
         help: () => {
-            return `Comandos:<br>
-            help -> Lista de Comandos<br>
-            clear -> Limpa tela<br>
-            iniciar -> Inicia o site<br>
-            status -> Mostra status do sistema<br>
-            version -> Vesão do sistema<br>
-            about -> Abre o perfil(sobre)<br>
-            projetos -> Lista de projetos<br>
-            contato -> Mostra contato`;
+            return `
+<pre>
+┌──────────────────────────────────────────────┐
+│           CENTRAL DE COMANDOS                │
+└──────────────────────────────────────────────┘
+
+ [SISTEMA]
+ help        → Exibe esta lista de comandos
+ clear       → Limpa a tela do terminal
+ status      → Mostra o estado atual do sistema
+ version     → Exibe a versão do sistema
+
+ [CONTROLE]
+ iniciar     → Inicializa o sistema
+ poweroff    → Desliga o sistema
+ exit        → Encerra o terminal
+
+ [USUÁRIO]
+ about       → Abre informações do desenvolvedor
+ projetos    → Lista os projetos disponíveis
+ contato     → Exibe informações de contato
+ skills      → Tecnologias e habilidades
+ objetivo    → Objetivo profissional
+ github      → Abre GitHub
+ linkedin    → Abre LinkedIn
+
+ [ESTRUTURA]
+ dir         → Mostra a estrutura do projeto
+
+───────────────────────────────────────────────
+
+Digite um comando e pressione ENTER.
+</pre>
+`;
+
         },
         clear: () => {
             terminal.innerHTML = createInputLine();
@@ -108,7 +85,6 @@ function getCommand(cmd) {
         iniciar: () => {
             // Adiciona texto no terminal
             terminal.innerHTML += `<p>${sistema()}</p>`;
-
             // Aguarda 4s antes de continuar
             setTimeout(() => {
                 // Alterna classe
@@ -117,10 +93,6 @@ function getCommand(cmd) {
                 // Exibe elementos
                 const site = document.getElementById('site');
                 site.style.display = 'block';
-
-                const mine = document.getElementById('mine');
-                mine.style.opacity = '1';
-
                 // Animação com GSAP
                 const pages = document.querySelectorAll('.page');
                 gsap.to(pages, {
@@ -129,90 +101,149 @@ function getCommand(cmd) {
                     duration: 2,
                     stagger: 0.5 // animação sequencial mais suave
                 });
-
-                // Toca áudio com tratamento de erros
-
-
             }, 3000);
             return ""
         },
         status: () => {
-            return `ESP32: Offline<br>
-                    MQTT: Offline<br>
-                    Sistema: Online<br>
-                    Ultima atualização: ${dia()}`
+            return `
+<pre>
+┌──────────────────────────────────────────────┐
+│            STATUS DO SISTEMA                 │
+└──────────────────────────────────────────────┘
+
+ Sistema ................. ${obterStatus()}
+ Última atualização ...... ${dia()}
+
+───────────────────────────────────────────────
+</pre>
+                    `
         },
         version: () => {
-            return `KOMBI SMART SYSTEM<br>
-                    Versão: v1.0.0<br>
-                    Build: 2026.03<br>
-                    Modo: Desenvolvimento`
+            return `
+<pre>
+┌──────────────────────────────────────────────┐
+│           SYSTEM INTERFACE                   │
+└──────────────────────────────────────────────┘
+
+ Versão ............. v1.0.0
+ Build .............. 2026.03
+ Modo ............... Desenvolvimento
+
+───────────────────────────────────────────────
+
+ Status: ${obterStatus()}
+</pre>              
+                    `
         },
         about: () => {
-            return `Desenvolvido por: <br>
-                    <br>
-                    Giovani Manzatto Furlan <br>
-                    Em desenvolvimento de Sistemas Embarcados <br>
-                    Tenho a Base do FrontEnd <br>
-                    <br>
-                    Stack: <br>
-                    - ESP32 (C++)<br>
-                    - MQTT<br>
-                    - Android (Kotlin) <br>
-                    - Raspberry Pi<br>
-                    - HTML <br>
-                    - CSS <br>
-                    - JavaScript <br>
-                    - Git e GitHub`
-        },
+    return `
+<pre>
+┌──────────────────────────────────────────────┐
+│             DESENVOLVEDOR                    │
+└──────────────────────────────────────────────┘
+
+ Nome .................... Giovani Manzatto Furlan
+ Área .................... Sistemas Embarcados
+ Foco .................... IoT integrado com aplicações web
+
+───────────────────────────────────────────────
+
+ Desenvolvedor focado na criação de sistemas embarcados
+ utilizando ESP32, com comunicação via MQTT e integração
+ com interfaces web modernas.
+
+ Possuo base sólida em desenvolvimento frontend, criando
+ aplicações responsivas e interativas utilizando HTML,
+ CSS e JavaScript.
+
+ Busco evoluir na construção de sistemas conectados,
+ unindo hardware e software em soluções completas.
+
+───────────────────────────────────────────────
+
+ Status: Em desenvolvimento contínuo 🚀
+</pre>
+`
+},
         projetos: () => {
-            return `Projetos Disponiveis: <br>
-                    <br>
-                    [1] Hamburgueria <br>
-                    Projeto: <a href="https://giovanimanzattof.github.io/portifolio-giovani-2.0/" target="_blank" rel="noopener noreferrer"style="text-decoration: none; color: #00ff00;">Clique aqui</a> <br>
-                    <br>
-                    [2] Pizzaria <br>
-                    Projeto: <a href="https://giovanimanzattof.github.io/pizzaria/" target="_blank" rel="noopener noreferrer"style="text-decoration: none; color: #00ff00;">Clique aqui</a><br>
-                    <br>
-                    [3] Cafeteria <br>
-                    Projeto: <a href="https://giovanimanzattof.github.io/cafeteria/" target="_blank" rel="noopener noreferrer"style="text-decoration: none; color: #00ff00;">Clique aqui</a><br>
-                    <br>
-                    [4] Carros <br>
-                    Projeto: <a href="https://giovanimanzattof.github.io/carros/" target="_blank" rel="noopener noreferrer"style="text-decoration: none; color: #00ff00;">Clique aqui</a><br>
-                    <br>
-                    [5] Cordel <br>
-                    Projeto: <a href="https://giovanimanzattof.github.io/projeto-cordel/" target="_blank" rel="noopener noreferrer"style="text-decoration: none; color: #00ff00;">Clique aqui</a><br>
-                    <br>
-                    [6] Minecraft <br>
-                    Projeto: <a href="https://giovanimanzattof.github.io/minecraft/" target="_blank" rel="noopener noreferrer"style="text-decoration: none; color: #00ff00;">Clique aqui</a><br>
-                    <br>
-                    [7] Barbearia <br>
-                    Projeto: <a href="https://giovanimanzattof.github.io/barbearia-projeto/" target="_blank" rel="noopener noreferrer"style="text-decoration: none; color: #00ff00;">Clique aqui</a>`
+            return `
+<pre>
+┌──────────────────────────────────────────────┐
+│              PROJETOS DISPONÍVEIS            │
+└──────────────────────────────────────────────┘
+
+ [01] Hamburgueria
+      → <a href="https://giovanimanzattof.github.io/portifolio-giovani-2.0/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #00ff00;">Acessar projeto</a>
+
+ [02] Pizzaria
+      → <a href="https://giovanimanzattof.github.io/pizzaria/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #00ff00;">Acessar projeto</a>
+
+ [03] Cafeteria
+      → <a href="https://giovanimanzattof.github.io/cafeteria/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #00ff00;">Acessar projeto</a>
+
+ [04] Carros
+      → <a href="https://giovanimanzattof.github.io/carros/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #00ff00;">Acessar projeto</a>
+
+ [05] Cordel
+      → <a href="https://giovanimanzattof.github.io/projeto-cordel/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #00ff00;">Acessar projeto</a>
+
+ [06] Minecraft
+      → <a href="https://giovanimanzattof.github.io/minecraft/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #00ff00;">Acessar projeto</a>
+
+ [07] Barbearia
+      → <a href="https://giovanimanzattof.github.io/barbearia-projeto/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #00ff00;">Acessar projeto</a>
+
+───────────────────────────────────────────────
+
+ Selecione um projeto para visualizar no navegador.
+</pre>
+`
         },
         contato: () => {
-            return `Email: giovanisistemaembarcado@gmail.com <br>
-                    GitHub: https://github.com/giovanimanzattof<br>
-                    LinkedIn: linkedin.com/in/seuuser<br>`
+            return `
+<pre>
+┌──────────────────────────────────────────────┐
+│                CONTATO                       │
+└──────────────────────────────────────────────┘
+
+ Email ............. giovanisistemaembarcado@gmail.com
+ GitHub ............ https://github.com/giovanimanzattof
+ LinkedIn .......... linkedin.com/in/seuuser
+
+───────────────────────────────────────────────
+
+ Disponível para oportunidades e colaborações.
+</pre>
+`
         },
         dir: () => {
             return `
 <pre>
-Portifolio
-├── Assets
-│   ├── CSS
-│   │   └── Style.css
-│   ├── Image
-│   │   └── logo.jpg
-│   └── js
-│       └── script.js
-└── index.html
+┌──────────────────────────────────────────────┐
+│           ESTRUTURA DO PROJETO               │
+└──────────────────────────────────────────────┘
+
+ Portfólio/
+ ├── assets/
+ │   ├── css/
+ │   │   └── style.css
+ │   ├── images/
+ │   │   └── logo.jpg
+ │   └── js/
+ │       └── script.js
+ │
+ └── index.html
+
+───────────────────────────────────────────────
+
+ Estrutura organizada para aplicação web.
 </pre>
 `;
         },
         exit: () => {
             setTimeout(() => {
                 terminalp.classList.remove('terminalh')
-            }, 3000);
+            }, 2000);
             return "Saindo.."
         },
         poweroff: () => {
@@ -230,13 +261,69 @@ Portifolio
 
             return "Sistema Desligando..."
         },
-        desligar: () => {
-            window.location.href = 'https://google.com'
-            return "Finalizando Sistema"
+        skills: () => {
+    return `
+<pre>
+Skills:
+    [BASE]
+Frontend .... HTML | CSS | JavaScript
+Ferramentas . Git | GitHub
+
+    [DESENVOLVENDO]
+IoT ......... ESP32 | MQTT | C++
+Mobile ...... Kotlin | Raspberry PI
+
+</pre>
+    `
         },
+        objetivo: () => {
+    return `
+<pre>
+┌──────────────────────────────────────────────┐
+│          OBJETIVO PROFISSIONAL               │
+└──────────────────────────────────────────────┘
 
+ Desenvolvedor em transição de carreira para a área
+ de Front-End, com foco em criação de interfaces
+ modernas, responsivas e bem estruturadas.
 
+ Possuo conhecimentos em HTML e CSS, atualmente
+ aprofundando JavaScript e boas práticas de
+ desenvolvimento web.
 
+ Cursando Segurança da Informação (FATEC Americana),
+ agregando visão em proteção de dados, análise de
+ vulnerabilidades e desenvolvimento seguro.
+
+ Experiência anterior como laboratorista de fotografia,
+ com forte atenção aos detalhes, organização e disciplina.
+
+───────────────────────────────────────────────
+
+ Objetivo:
+
+ Conquistar minha primeira oportunidade como
+ Desenvolvedor Front-End, contribuindo com a equipe,
+ evoluindo continuamente e participando de projetos
+ que gerem impacto.
+
+───────────────────────────────────────────────
+
+ Foco Futuro:
+
+ Desenvolvimento de soluções IoT com ESP32 integradas
+ a aplicações web modernas, criando sistemas
+ conectados, escaláveis e eficientes.
+
+</pre>
+    `
+        },
+        github: () => {
+            window.open("https://github.com/giovanimanzattof")
+        },
+        linkedin: () => {
+            window.open("https://github.com/giovanimanzattof")
+        }
     };
     return comandos[cmd]
         ? comandos[cmd]()
