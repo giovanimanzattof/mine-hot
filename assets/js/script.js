@@ -1,43 +1,4 @@
 
-<<<<<<< HEAD
-=======
-const bar = document.getElementById('bar')
-const botao = document.getElementById('botao')
-
-const total = 9
-
-const modulos = [
-    { icon: "🚗", nome: "Kombi Smart" },
-    { icon: "📡", nome: "MQTT" },
-    { icon: "🔌", nome: "ESP32" },
-    { icon: "🧠", nome: "Sobre" },
-    { icon: "📊", nome: "Logs" },
-    { icon: "⚙️", nome: "Sistema" },
-    { icon: "📞", nome: "Contato" },
-    { icon: "📁", nome: "Projetos" }
-];
-
-for (let i = 0; i < total; i++) {
-    const bar = document.createElement('div');
-    bar.classList.add('bar');
-
-    // 🔹 adiciona ícone se existir
-    if (modulos[i]) {
-        const item = document.createElement('span');
-        item.classList.add("icone");
-        item.textContent = modulos[i].icon;
-        item.title = modulos[i].nome;
-
-
-        bar.appendChild(item);
-    }
-
-    hot.appendChild(bar);
-}
-
-
-
->>>>>>> d23ff0150725680f721fa2e29fa5a33562883f11
 const input = document.querySelector(".terminal-input");
 const terminal = document.getElementById("terminal");
 
