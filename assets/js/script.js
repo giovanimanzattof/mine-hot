@@ -30,19 +30,6 @@ for (let i = 0; i < total; i++) {
         bar.appendChild(item);
     }
 
-    // 🔹 último slot com botão
-    if (i === total - 1) {
-        const button = document.createElement('button');
-        button.textContent = 'Abrir';
-        button.classList.add("botao");
-
-        button.addEventListener('click', () => {
-            inventario.classList.toggle('hidden');
-        });
-
-        bar.appendChild(button);
-    }
-
     hot.appendChild(bar);
 }
 
