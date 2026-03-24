@@ -275,16 +275,6 @@ input::placeholder {
 
 
 @media screen and (max-width:600px) {
-
-    .hot-bar {
-        width: 300px;
-    }
-
-
-    .bar {
-        height: 30px;
-        width: 50px;
-    }
     .terminal {
         width: 300px;
     }
@@ -320,6 +310,8 @@ input::placeholder {
     .icone{
         font-size: 14px;
     }
-    
+    pre{
+        font-size: 8px;
+    }
 
 }

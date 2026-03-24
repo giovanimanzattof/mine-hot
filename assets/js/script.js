@@ -137,7 +137,7 @@ Digite um comando e pressione ENTER.
         },
         about: () => {
     return `
-<pre>
+<pre class="INFO">
 ┌──────────────────────────────────────────────┐
 │             DESENVOLVEDOR                    │
 └──────────────────────────────────────────────┘
@@ -167,7 +167,7 @@ Digite um comando e pressione ENTER.
 },
         projetos: () => {
             return `
-<pre>
+<pre class="INFO">
 ┌──────────────────────────────────────────────┐
 │              PROJETOS DISPONÍVEIS            │
 └──────────────────────────────────────────────┘
