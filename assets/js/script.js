@@ -436,3 +436,16 @@ statuss.appendChild(statusdiv)
 setInterval(() => {
     statusdiv.innerHTML = `Status: <span class="statuss">${obterStatus()}</span>`
 }, 200)
+
+
+const minimizar = document.getElementById('minimizar')
+const maxmizar = document.getElementById('maxmizar')
+const fechar = document.getElementById('fechar')
+
+fechar.addEventListener('click', () => {
+    terminalp.classList.remove('terminalh')
+})
+
+minimizar.addEventListener('click', () => {
+    terminalp.classList.remove('terminalh')
+})
